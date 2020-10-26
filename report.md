@@ -288,7 +288,7 @@ Environment status: 3
 ```
 
 ## Question Answering
-1. The page base address is stored in `kern_pgdir` and in register `UPAGES`. OS switches context by `lcr3(PADDR(pgdir))`. (A pointer to the page is saved in `pgdir`.)
+1. The page base address is stored in `kern_pgdir` and in register `cr3`. OS switches context by `lcr3()`. (A pointer to the page is saved in `pgdir`.)
 2. `iret` (interrupt return) is the last instruction executed by the trap handler. After that, the kernel should switch context back to user mode. The top of kernel stack is defined in `KSTACKTOP`. `%esp` and `%eip` are saved by the processor, while `%eax` and `%ebx` are save by the JOS kernel.
 3. Both IDT and GDT are containers for segment information. However, IDT stores executable segment for trap handlers, containing the handler entry point offset and base segment descriptor. GDT is the global descriptor table storing segment information (base address, privilege levels, ...) pertaining to the operating system's virtual memory. GDT is used for memory mapping. Segment selector and segment offset work coherently to consult the GDT.
 
